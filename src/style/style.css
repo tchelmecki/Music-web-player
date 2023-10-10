@@ -1,0 +1,106 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.control-panel{
+    background-color: aqua;
+    position: fixed;
+    bottom: 0;
+    width: 100svw;
+    height: 15svh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1f1f1f;
+    flex-wrap: wrap;
+}
+
+.bar-record{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bar-record span{
+    width: 5%;
+    text-align: center;
+}
+
+.bar-container{
+    width: 95%;
+    height: 3px;
+
+    
+}
+
+.bar{
+    width: 95%;
+    height: 3px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+.dot{
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border-radius: 100%;
+    border: none;
+    transition: .2s ease-in-out all;
+}
+.dot:hover{
+    background-color: #cacaca;
+    cursor: pointer;
+}
+
+.control-panel button{
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.control-panel .play{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid white;
+    padding-left: 3px;
+    border-radius: 100%;
+    transition: .2s ease-in-out all;
+}
+
+
+.control-panel button:hover{
+    opacity: 80%;
+    cursor: pointer;
+}
+
+
+/*LEFT*/
+.left{
+    width: 20svw;
+    height: 85svh;
+    background-color: #282828;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    flex-direction: column;
+}
+
+.left span{
+    margin-top: 20px;
+    transition: .2s ease-in-out all;
+}
+
+.left span:hover{
+    opacity: 80%;
+    cursor: pointer;
+}
