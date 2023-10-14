@@ -23,12 +23,21 @@ const Control = () =>{
                     <div className="bar"> <div className="dot"></div></div>
                 </div>
             </div>
+            <div className=" w-full  grid grid-cols-3">
+            <div></div>
+            <div className="flex justify-center ">
             <button><LiaRandomSolid/></button>
             <button><AiFillStepBackward/></button>
             <button className="play"><FaPlay/></button>
             <button><AiFillStepForward/></button>
             <button><TbRepeat/></button>
+            </div>
+            
+            <div className="flex justify-end items-center pr-20">
             <button><PiSpeakerSimpleHighFill/></button>
+            </div>
+          
+            </div>
         </div>
         </>
     )
