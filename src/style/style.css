@@ -49,12 +49,20 @@
 }
 
 .girl{
-    width: 250px;
-    height: 250px;
+    width: 320px;
+    height: 320px;
     background-image: url(../assets/girl.png);
     background-position: center;
     background-repeat: no-repeat; 
     background-size:contain;
+}
+
+.btn-file{
+    background-color: rgba(55,53,86,255);
+}
+
+.btn-file:hover{
+    background-color: rgba(55,53,70,255);
 }
 
 .tag{
