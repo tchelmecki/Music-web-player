@@ -6,6 +6,7 @@
 
 .body{
     display: flex;
+    font-family: 'Poppins', sans-serif;
 }
 
 /*LEFT*/
@@ -59,10 +60,12 @@
 
 .btn-file{
     background-color: rgba(55,53,86,255);
+    font-family: 'Poppins', sans-serif;
+
 }
 
 .btn-file:hover{
-    background-color: rgba(55,53,70,255);
+    background-color: #4a448b;
 }
 
 .tag{

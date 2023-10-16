@@ -7,10 +7,9 @@ const Left = () => {
     return(
         <>
         <div class="left ">
-            <span class=" flex justify-center items-center font-medium"><TfiLayoutMediaCenterAlt class="mr-2"/> MEDIA PLAYER WEB</span>
-            <span>Music library</span>
-            <span>Video library</span>
-            <span>Playlists</span>
+            <span class="flex justify-center items-center font-medium text-2xl"><TfiLayoutMediaCenterAlt class="mr-2"/>MUSIC PLAYER WEB</span>
+            <span>music library</span>
+            <span>playlists</span>
         </div>
         </>
     )
