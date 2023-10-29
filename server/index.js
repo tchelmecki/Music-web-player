@@ -1,7 +1,12 @@
 import express from "express";
 import mysql from "mysql";
+import cors from "cors";
+
 
 const app = express();
+
+app.use(express.json());
+app.use(cors());
 
 const db = mysql.createConnection({
     host: "localhost",
@@ -15,7 +20,7 @@ app.get("/", (req, res) => {
     res.json("hello this is backend");
 });
 
-app.get("/studenci", (req,res) => {
+app.get("/library", (req,res) => {
     const q = "SELECT * FROM studenci";
     db.query(q, (err, data) => {
         if(err) return res.json(err)
