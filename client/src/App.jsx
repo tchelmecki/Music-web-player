@@ -6,8 +6,8 @@ import Navbar from './components/Navbar';
 import {render} from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Main } from './pages/Main';
-// import { Add } from './pages/Add';
 import Library from './pages/Library';
+import Add from './pages/Add';
 
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
       <Routes>
           <Route path="/" element={<Main/>}/>
           <Route path="/library" element={<Library/>}/>
-          {/* <Route path="/Add" element={<Add/>}/> */}
+          <Route path="/add" element={<Add/>}/>
 
       </Routes>
       </BrowserRouter>

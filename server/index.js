@@ -26,6 +26,32 @@ app.get("/library", (req,res) => {
         if(err) return res.json(err)
         return res.json(data);
     })
+});
+
+app.post("/library", (req,res)=>{
+    const q = "INSERT INTO studenci (`studenci_id`,`imie`,`nazwisko`,`numer_indeksu`) VALUES (?)";
+    const values = [
+        null,
+        req.body.imie,
+        req.body.nazwisko,
+        req.body.numer_indeksu,
+    ];
+
+    db.query(q,[values], (err,data)=>{
+        if(err) return res.json(err);
+        return res.json("Adding has been created");
+    });
+});
+
+app.delete("/library/:studenci_id", (req,res)=>{
+    const libraryId = req.params.studenci_id;
+    const q = "DELETE from studenci WHERE studenci_id = ?";
+
+    db.query(q,[libraryId], (err,data)=>{
+        if(err) return res.json(err);
+        return res.json("Library has been deleted");
+    });
+
 })
 
 app.listen(8800, ()=>{
