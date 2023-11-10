@@ -9,9 +9,10 @@ const Left = () => {
     return(
         <>
         <div class="left ">
-            <span class="flex justify-center items-center font-medium text-2xl"><TfiLayoutMediaCenterAlt class="mr-2"/>MUSIC PLAYER WEB</span>
+            <Link to="/main"><span class="flex justify-center items-center font-medium text-2xl"><TfiLayoutMediaCenterAlt class="mr-2"/>MUSIC PLAYER WEB</span></Link>
             <span><Link to="/library">music library</Link></span>
             <span>playlists</span>
+            <span><Link to="/">logout</Link></span>
         </div>
         </>
     )

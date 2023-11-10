@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color:#fff;
 }
 
 .body{
@@ -9,7 +10,7 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/*LEFT*/
+/*==============LEFT==============*/
 .left{
     width: 20svw;
     height: 85svh;
@@ -30,7 +31,7 @@
     cursor: pointer;
 }
 
-/*CONTENT*/
+/*==============CONTENT==============*/
 
 .content{
     width: 80svw;
@@ -74,7 +75,7 @@
 }
 
 
-/*CONTROL-PANEL*/
+/*==============CONTROL-PANEL==============*/
 
 .control-panel{
     background-color: aqua;
@@ -104,8 +105,6 @@
 .bar-container{
     width: 95%;
     height: 3px;
-
-    
 }
 
 .bar{
@@ -157,3 +156,54 @@
     cursor: pointer;
 }
 
+/*==============HOME==============*/
+.home-container{
+    width: 100svw;
+    height: 100svh;
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.home-nav{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    padding-left: 40px;
+}
+.form-container{
+    width: 100%;
+    min-height: 90%;
+    /* background-color:burlywood; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* 
+.home-form{
+    
+} */
+
+.form-conf{
+    width: 300px;
+    height: 800px;
+    /* background-color:blue; */
+    /* border: 1px black solid;
+    border-radius: 20px; */
+    display: flex;
+    flex-direction: column;
+}
+
+.form-conf button{
+    background-color: #4a448b;
+    transition: .2s ease-in-out all;
+}
+
+.form-conf button:hover{
+    background-color: rgba(55,53,86,255);
+}
+
+.form-conf input{
+    background-color: #282828;
+}

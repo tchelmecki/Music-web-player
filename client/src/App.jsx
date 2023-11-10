@@ -1,13 +1,10 @@
 import './App.css'
-import Content from './components/Content';
-import Control from './components/Control';
-import Left from './components/Left';
-import Navbar from './components/Navbar';
-import {render} from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Main } from './pages/Main';
 import Library from './pages/Library';
 import Add from './pages/Add';
+import Home from './pages/Home';
+import Signup from './pages/Signup';
 
 
 function App() {
@@ -18,7 +15,9 @@ function App() {
       {/* <Navbar /> */}
       <BrowserRouter>
       <Routes>
-          <Route path="/" element={<Main/>}/>
+          <Route path="/" element={<Home />}/>
+          <Route path="/signup" element={<Signup/>}/>
+          <Route path="/main" element={<Main/>}/>
           <Route path="/library" element={<Library/>}/>
           <Route path="/add" element={<Add/>}/>
 

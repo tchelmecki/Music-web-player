@@ -15,7 +15,7 @@ const Content = () => {
             </div>
             <div className="info flex items-center w-1/2 h-full">
                 <div className="info-text flex flex-col">
-                <span className="tag">Media Player Web</span>
+                <span className="tag">Music Player Web</span>
                 <span>Use this app to play your favourite song and explore <br /> your personal libraries. Enjoy!</span>
                 <button className="btn-file w-40 h-10 mt-3 border-none rounded-md">
                     <span className="flex justify-center items-center"><BiFolder className="mr-1"/>Open file(s)</span>

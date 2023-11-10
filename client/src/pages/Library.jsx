@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import Left from '../components/Left';
+import Control from '../components/Control';
 
 const Library = () => {
 
@@ -28,8 +30,8 @@ const Library = () => {
   }
   return (
     <>
-    <div>
-      <h1>Library</h1>
+    <Left />
+    <div> 
       <div className="library">
         {playlists.map(library=>(
           <div className="playlist grid grid-rows-1 grid-flow-col gap-4 " key={library.studenci_id}>
@@ -44,6 +46,7 @@ const Library = () => {
       
       <button className="hover:bg-slate-600"><Link to="/add">Add position</Link></button>
     </div>
+    <Control />
     </>
   )
 }
