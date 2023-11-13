@@ -1,6 +1,7 @@
 import React from "react";
 import "../style/style.css";
 import { Link, useLocation } from "react-router-dom";
+import { motion } from "framer-motion"
 
 const Form = (props) =>{
 
@@ -11,7 +12,10 @@ const Form = (props) =>{
     
     return(
         <>
-        <div className="form-container">
+        <motion.div className="form-container"
+            initial={{ opacity: 0}}
+            animate={{ opacity: 1}}
+            transition={{ delay: 0.2,  type: 'spring', duration: 2}}>
                 <div className="home-form">
                     <form action="" className="flex flex-wrap">
                         <div className="form-conf">
@@ -32,7 +36,7 @@ const Form = (props) =>{
                         </div>   
                     </form>      
                 </div>
-            </div>
+            </motion.div>
         </>
     )
 };

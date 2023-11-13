@@ -3,12 +3,17 @@ import "../style/style.css";
 import contentImage from "../assets/content-image.png";
 import { BiFolder } from 'react-icons/bi';
 import { FaRegSmileBeam } from 'react-icons/fa';
+import { motion } from "framer-motion";
 
 
 const Content = () => {
     return(
         <>
-        <div className="content ">
+        
+        <motion.div className="content "
+        initial={{ opacity: 0}}
+        animate={{ opacity: 1}}
+        transition={{ delay: 0.2,  type: 'spring', duration: 2}}>
             <div className="flex justify-end items-center w-1/2 h-full pr-10">
             <div className="girl mr-20">
             </div>
@@ -22,7 +27,7 @@ const Content = () => {
                     </button>
                 </div>
             </div>
-        </div>
+        </motion.div>
         </>
     )
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../style/style.css";
 import { FaPlay } from 'react-icons/fa';
 import { AiFillStepBackward, AiFillStepForward } from 'react-icons/ai';
@@ -6,17 +6,17 @@ import { TbRepeat } from 'react-icons/tb';
 import { LiaRandomSolid } from 'react-icons/lia';
 import { PiSpeakerSimpleHighFill } from 'react-icons/pi';
 import { PiSpeakerSimpleSlashFill } from 'react-icons/pi';
+import { motion } from "framer-motion";
 
-
-
-
-// TbRepeatOff
-// TbRepeatOnce
 
 const Control = () =>{
+
     return(
         <>
-        <div className="control-panel">
+        <motion.div className="control-panel"
+            initial={{ opacity: 0}}
+            animate={{ opacity: 1}}
+            transition={{ delay: 0.2,  type: 'spring', duration: 2}}>
             <div className="bar-record">
                 <span>00:00:00</span>
                 <div className="bar-container">
@@ -38,7 +38,7 @@ const Control = () =>{
             </div>
           
             </div>
-        </div>
+        </motion.div>
         </>
     )
 };

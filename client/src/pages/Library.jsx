@@ -34,12 +34,12 @@ const Library = () => {
     <div> 
       <div className="library">
         {playlists.map(library=>(
-          <div className="playlist grid grid-rows-1 grid-flow-col gap-4 " key={library.studenci_id}>
+          <div className="playlist grid grid-rows-1 grid-flow-col gap-4 " key={library.id_users}>
             {/* <div className='bg-slate-400 text-center'>{library.studenci_id}</div> */}
-           <div className='bg-slate-400 text-center'>{library.imie}</div>
-           <div className="text-center bg-slate-500">{library.nazwisko}</div>
-           <div className="text-center">{library.numer_indeksu}</div>
-           <button className="hover:bg-slate-600" onClick={()=>handleDelete(library.studenci_id)}>Delete</button>
+           <div className='bg-slate-400 text-center'>{library.username}</div>
+           <div className="text-center bg-slate-500">{library.email}</div>
+           <div className="text-center">{library.pswd}</div>
+           <button className="hover:bg-slate-600" onClick={()=>handleDelete(library.id_users)}>Delete</button>
           </div>
         ))}
       </div>
