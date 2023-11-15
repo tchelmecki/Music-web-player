@@ -65,18 +65,18 @@ app.get("/library", (req,res) => {
 });
 
 app.post('/signup', (req, res) => {
-    const q = "INSERT INTO users (``,`username`, `email`, `pswd`) VALUES (?)";
+    const q = "INSERT INTO users (`username`, `email`, `pswd`) VALUES (?)";
     const values = [
-        null,
         req.body.username,
         req.body.email,
         req.body.pswd
-    ]
+    ];
     db.query(q, [values], (err, result) => {
-        if(err) return res.json({Message: "Error in Node"});
-        return req.json(result);
-    })
-})
+        if(err) return res.json({ Message: "Error in Node" });
+        return res.json(result);
+    });
+});
+
 
 
 

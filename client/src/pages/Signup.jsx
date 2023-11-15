@@ -17,9 +17,10 @@ const Signup = (props) => {
 
     const navigate = useNavigate();
 
-    const handleInput = async (event) =>{
-        setValues(prev => ({...prev, [event.target.username]: [event.target.value]}))
+    const handleInput = async (event) => {
+        setValues(prev => ({...prev, [event.target.name]: event.target.value}));
     }
+    
 
     axios.defaults.withCredentials = true;
 
@@ -40,7 +41,6 @@ const Signup = (props) => {
         event.preventDefault();
         axios.post("http://localhost:8800/signup", values)
         .then(res => {
-
             console.log(res);
             navigate("/login")
         })

@@ -39,6 +39,8 @@ const Songs = (props) => {
            <div className="text-center bg-slate-500">{songs.title}</div>
            <div className="text-center">{songs.genre}</div>
            {/* <button className="hover:bg-slate-600" onClick={()=>handleDelete(library.songs_id)}>Delete</button> */}
+
+           <audio src="../assets/music1.wav"></audio>
           </div>
         ))}
       </div>
