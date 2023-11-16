@@ -20,7 +20,7 @@ const Left = () => {
 
     return(
         <>
-        <motion.div class="left "
+        <div class="left "
              initial={{ opacity: 0}}
              animate={{ opacity: 1}}
              transition={{ delay: 0.2,  type: 'spring', duration: 2}}>
@@ -28,8 +28,9 @@ const Left = () => {
             <span><Link to="/library">music library</Link></span>
             <span>playlists</span>
             <span><Link to="/songs">songs</Link></span>
+            <span><Link to="/about">about</Link></span>
             <span onClick={handleLogout}>logout</span>
-        </motion.div>
+        </div>
         </>
     )
 };

@@ -11,7 +11,7 @@ import { FaPause } from "react-icons/fa";
 import  music  from "../assets/music1.wav";
 
 
-const Control =React.memo(() =>{
+const Control = React.memo(() =>{
 
     //state
     const [isPlaying, setIsPlaying] = useState(false);
@@ -90,7 +90,7 @@ const Control =React.memo(() =>{
 
     return(
         <>
-        <motion.div className="control-panel"
+        <div className="control-panel"
             initial={{ opacity: 0}}
             animate={{ opacity: 1}}
             transition={{ delay: 0.2,  type: 'spring', duration: 2}}>
@@ -122,12 +122,12 @@ const Control =React.memo(() =>{
             </div>
             
             {/* sound  */}
-            <div className="flex justify-end items-center pr-10">
+            <div className="sound flex justify-end items-center pr-10">
             <button><PiSpeakerSimpleHighFill/></button>
             </div>
           
             </div>
-        </motion.div>
+        </div>
         </>
     )
 });

@@ -28,16 +28,19 @@ const Songs = (props) => {
     return(
         <>
         <Left />
-        <div className="">
-        <div>
+        <div className="songs-container">
+        {/* <div>
             <span>Author: </span> <span>Title: </span> <span> Genre: </span>
-        </div>
+        </div> */}
         {song.map(songs=>(
-          <div className="playlist grid grid-rows-1 grid-flow-col gap-4 " key={songs.songs_id}>
+          <div className="songs" key={songs.songs_id}>
             {/* <div className='bg-slate-400 text-center'>{library.studenci_id}</div> */}
-           <div className='bg-slate-400 text-center'>{songs.author}</div>
-           <div className="text-center bg-slate-500">{songs.title}</div>
-           <div className="text-center">{songs.genre}</div>
+            <div className='songs-info'>
+              <div className='flex justify-center items-center songs-record w-20 h-full '><div className='cover'></div></div>
+              <div className='songs-record w-60 h-full' >{songs.author}</div>
+              <div className='songs-record w-60 h-full'>{songs.title}</div>
+              <div className='songs-record w-60 h-full'>{songs.genre}</div>
+            </div>
            {/* <button className="hover:bg-slate-600" onClick={()=>handleDelete(library.songs_id)}>Delete</button> */}
 
            <audio src="../assets/music1.wav"></audio>
