@@ -1,4 +1,4 @@
-# Media Web Player
+# Music Web Player
 
 <h3>Work in progress...</h3>
 
