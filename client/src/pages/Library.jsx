@@ -46,7 +46,7 @@ const Library = () => {
       
       <button className="hover:bg-slate-600"><Link to="/add">Add position</Link></button>
     </div>
-    <Control />
+    {/* <Control /> */}
     </>
   )
 }

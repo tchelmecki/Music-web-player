@@ -34,6 +34,17 @@ const db = mysql.createConnection({
     port: 55555
 }); 
 
+db.connect((err) => {
+    if (err) {
+      console.error('Błąd połączenia z bazą danych:', err.message);
+    //   return res.status(500).json({ error: 'Błąd połączenia z bazą danych' });
+    } else {
+      console.log('Połączono z bazą danych');
+    }
+  });
+
+
+
 app.get("/main", (req, res) => {
     if(req.session.username) {
         return res.json({valid: true, username: req.session.username});
@@ -112,7 +123,7 @@ app.post('/login', (req, res) => {
 
 
 app.get("/songs", (req,res) => {
-    const q = "SELECT `author`,`title`, `genre`, `album` from songs";
+    const q = "SELECT `author`,`title`, `genre`, `album`, `file_path`, `cover` from songs";
     db.query(q, (err, data) => {
         if(err) return res.json(err)
         return res.json(data);

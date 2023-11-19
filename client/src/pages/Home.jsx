@@ -9,7 +9,7 @@ import axios from "axios";
 import hair from "../assets/hair.png"
 
 
-const Home = (props) => {
+const Home = () => {
     const navigate = useNavigate();
 
     const handleInput = async (event) =>{
@@ -40,7 +40,7 @@ const Home = (props) => {
             transition={{ delay: 0.2,  type: 'spring', duration: 2}}>
                 <Link to="/login"><button className="bg-indigo-800 w-60 rounded-full h-14 mb-6 mr-2" type='submit'>Login</button></Link>
                 <Link to="/signup"><button className="bg-indigo-800 w-60 rounded-full h-14 mb-6 ml-2" type='submit'>Sign up</button></Link>
-            </motion.div>
+            </motion.div> 
         </div>
         </>
     )

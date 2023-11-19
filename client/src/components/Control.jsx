@@ -11,7 +11,7 @@ import { FaPause } from "react-icons/fa";
 import  music  from "../assets/music1.wav";
 
 
-const Control = React.memo(() =>{
+const Control = React.memo(({ selectedSong }) =>{
 
     //state
     const [isPlaying, setIsPlaying] = useState(false);
@@ -88,14 +88,36 @@ const Control = React.memo(() =>{
         changePlayerCurrentTime();
       }
 
+      useEffect(() => {
+        console.log("Selected song in Control:", selectedSong);
+      }, [selectedSong]);
+
+      const handleVolumeChange = (e) => {
+        const volumeValue = e.target.value;
+        audioPlayer.current.volume = volumeValue;
+      };
+
+
+      const [isHovered, setIsHovered] = useState(false);
+
+        const handleMouseEnter = () => {
+            setIsHovered(true);
+        };
+
+        const handleMouseLeave = () => {
+            setIsHovered(false);
+        };
+
+      
+
     return(
         <>
-        <div className="control-panel"
-            initial={{ opacity: 0}}
-            animate={{ opacity: 1}}
-            transition={{ delay: 0.2,  type: 'spring', duration: 2}}>
-            <audio ref={audioPlayer} src={music}></audio>
-
+        <motion.div className="control-panel"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1,  type: 'spring', duration: 0.5}}>
+            <audio ref={audioPlayer} src={`src/assets/${selectedSong?.file_path}`} type="audio/wav"></audio>
+            
             {/* progress bar */}
             <div className="bar-record">
                 <span>{calculateTime(currentTime)}</span>
@@ -105,8 +127,20 @@ const Control = React.memo(() =>{
                 {/* {(duration && !isNaN(duration)) &&  */}
                 <span>{(duration && !isNaN(duration)) && calculateTime(duration)}</span>
             </div>
-            <div className=" w-full  grid grid-cols-3">
-            <div></div>
+
+            <div className="w-full  grid grid-cols-3">
+            <div className="ml-5">
+                <div className="flex">
+                    <img className="cover" src={`src/assets/${selectedSong?.cover}`}></img>
+                    <div className="flex flex-col ml-2">
+                        <span className="font-bold">{selectedSong?.title}</span>
+                        <span>{selectedSong?.author}</span> 
+                    </div>
+                </div>
+
+                    
+
+            </div>
             
             <div className="flex justify-center ">
             {/* back 15s */}
@@ -120,14 +154,41 @@ const Control = React.memo(() =>{
             <button onClick={forwardFifteen}><AiFillStepForward/></button>
             <button><TbRepeat/></button>
             </div>
+
+            {/* <div>
+            File Path: {selectedSong?.file_path}
+            </div> */}
             
             {/* sound  */}
             <div className="sound flex justify-end items-center pr-10">
-            <button><PiSpeakerSimpleHighFill/></button>
+                <div className="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                <button >
+                    <PiSpeakerSimpleHighFill/>
+                </button>
+
+
+                {isHovered && (
+                <div className="volume-slider" >
+                    <input className="slider"
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.1"
+                    defaultValue={audioPlayer.current ? audioPlayer.current.volume : 0}
+                    onChange={handleVolumeChange}
+                    />
+                </div>
+                )}
+
+            </div>
             </div>
           
             </div>
-        </div>
+
+
+            
+            
+        </motion.div>
         </>
     )
 });

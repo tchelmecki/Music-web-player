@@ -6,8 +6,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export const Main = () => {
+
   const [name, setName] = useState('');
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+
 
     axios.defaults.withCredentials = true;
 
@@ -24,9 +26,9 @@ export const Main = () => {
     }, [])
   return (
     <>
-      <Left />
+      <Left/>
       <Content />
-      <Control />
+      {/* <Control /> */}
     </>
   )
 }
