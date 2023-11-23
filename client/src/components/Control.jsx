@@ -108,8 +108,6 @@ const Control = React.memo(({ selectedSong }) =>{
             setIsHovered(false);
         };
 
-    const [isClicked, setIsClicked] = useState(false);
-
       
 
     return(
@@ -169,7 +167,7 @@ const Control = React.memo(({ selectedSong }) =>{
                 </button>
 
 
-                
+                {isHovered && (
                 <div className="volume-slider" >
                     <input className="slider"
                     type="range"
@@ -177,10 +175,10 @@ const Control = React.memo(({ selectedSong }) =>{
                     max="1"
                     step="0.1"
                     defaultValue={audioPlayer.current ? audioPlayer.current.volume : 0}
-                    onClick={isClicked}
+                    onChange={handleVolumeChange}
                     />
                 </div>
-            
+                )}
 
             </div>
             </div>
