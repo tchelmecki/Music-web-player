@@ -10,12 +10,14 @@ import Left from "../components/Left";
 import Control from "../components/Control";
 import { FaPlus } from "react-icons/fa";
 import { HiOutlineDotsVertical } from "react-icons/hi";
+import AddSong from '../components/AddSong';
 
 
 const Songs = (props) => {
   //states
    const [song, setSong] = useState([]);
    const [selectedSong, setSelectedSong] = useState(null); 
+   const [openModal, setOpenModal] = useState(false);
 
 
   //effects
@@ -36,7 +38,6 @@ const Songs = (props) => {
     setSelectedSong(song);
     console.log("Selected song in songs:", song);
   };
-  
 
   return (
     <>
@@ -49,7 +50,8 @@ const Songs = (props) => {
           <div className='w-1/6 flex justify-center '>TITLE</div>
           <div className='w-1/6 flex justify-center'>ALBUM</div>
           <div className='w-1/6 flex justify-center'>GENRE</div>
-          <div className='plus'><FaPlus /></div>
+          <div className='plus' onClick={()=>setOpenModal(true)}><FaPlus /></div>
+         
         </div>
         
             {song.map(songs=>(
@@ -77,6 +79,7 @@ const Songs = (props) => {
                     {/* <audio src="../assets/music1.wav"></audio> */}
                 </div>
             ))}
+             <AddSong open={openModal} onClose={()=>setOpenModal(false)}/>
             
         </div>
     </>

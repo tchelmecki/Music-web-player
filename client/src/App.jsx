@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Songs from './pages/Songs';
 import Login from './pages/Login';
+import About from './pages/About';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/songs" element={<Songs />}/>
           <Route path="/library" element={<Library/>}/>
           <Route path="/add" element={<Add/>}/>
+          <Route path="/about" element={<About/>}/>
 
       </Routes>
       </BrowserRouter>
