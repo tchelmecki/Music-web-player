@@ -19,7 +19,7 @@ const Home = () => {
     axios.defaults.withCredentials = true;
 
     useEffect(() => {
-        axios.get('http://localhost:8800/main')
+        axios.get('http://localhost:8800/home')
         .then( res => {
             if(res.data.valid){
                 navigate('/main');
@@ -32,16 +32,15 @@ const Home = () => {
 
     return(
         <>
-        <div className="home-container">
-            <Navbar /> 
-            <motion.div className="form-container"
-            initial={{ opacity: 0}}
+        <motion.div className="home-container" initial={{ opacity: 0}}
             animate={{ opacity: 1}}
             transition={{ delay: 0.2,  type: 'spring', duration: 2}}>
-                <Link to="/login"><button className="bg-indigo-800 w-60 rounded-full h-14 mb-6 mr-2" type='submit'>Login</button></Link>
-                <Link to="/signup"><button className="bg-indigo-800 w-60 rounded-full h-14 mb-6 ml-2" type='submit'>Sign up</button></Link>
-            </motion.div> 
-        </div>
+            <Navbar /> 
+            <div className="form-container">
+                <Link to="/login"><button className="bg-purple w-60 rounded-full h-14 mb-6 mr-2" type='submit'>Login</button></Link>
+                <Link to="/signup"><button className="bg-purple w-60 rounded-full h-14 mb-6 ml-2" type='submit'>Sign up</button></Link>
+            </div> 
+        </motion.div>
         </>
     )
 };

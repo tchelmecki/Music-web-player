@@ -9,6 +9,8 @@ import { PiSpeakerSimpleSlashFill } from 'react-icons/pi';
 import { motion } from "framer-motion";
 import { FaPause } from "react-icons/fa";
 import  music  from "../assets/music1.wav";
+import { TbRewindForward15 } from "react-icons/tb";
+import { TbRewindBackward15 } from "react-icons/tb";
 
 
 const Control = React.memo(({ selectedSong }) =>{
@@ -145,13 +147,15 @@ const Control = React.memo(({ selectedSong }) =>{
             <div className="flex justify-center ">
             {/* back 15s */}
             <button><LiaRandomSolid/></button>
-            <button onClick={backFifteen}><AiFillStepBackward/></button>
+            <button onClick={backFifteen}><TbRewindBackward15 /></button>
+            <button ><AiFillStepBackward/></button>
 
             {/* play or pause */}
             <button onClick={togglePlayPause} className="play">{ isPlaying ? <FaPause/> : <FaPlay/> }</button>
             
             {/* forward 15s */}
-            <button onClick={forwardFifteen}><AiFillStepForward/></button>
+            <button ><AiFillStepForward/></button>
+            <button onClick={forwardFifteen}><TbRewindForward15 /></button>
             <button><TbRepeat/></button>
             </div>
 
@@ -167,7 +171,7 @@ const Control = React.memo(({ selectedSong }) =>{
                 </button>
 
 
-                {isHovered && (
+                {/* {isHovered && ( */}
                 <div className="volume-slider" >
                     <input className="slider"
                     type="range"
@@ -178,7 +182,7 @@ const Control = React.memo(({ selectedSong }) =>{
                     onChange={handleVolumeChange}
                     />
                 </div>
-                )}
+                {/* )} */}
 
             </div>
             </div>

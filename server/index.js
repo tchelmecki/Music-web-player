@@ -4,7 +4,7 @@ import cors from "cors";
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 
 const app = express();
 

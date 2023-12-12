@@ -128,9 +128,18 @@
     width: 50px;
     height: 50px;
     border-radius: 10px;
+    position: relative;
+    overflow: hidden;
     
     /* background-color: #cdcdcd; */
 }
+
+.cover input[type='file']{
+    position: absolute;
+    transform: scale(2);
+    top: 13px;
+    opacity: 0;
+}   
 
 .songs-record span{
     height: 55%;
@@ -349,7 +358,7 @@
 }
 
 
-.control-panel button:hover{
+.control-panel button:hover:not(.sound button){
     opacity: 80%;
     cursor: pointer;
 }
@@ -409,70 +418,75 @@
 
 /*===========SOUND===========*/
 
-.sound{
+.sound {
     position: relative;
 }
 
-.sound button{
+.sound button {
     width: 50px;
     border-radius: 10px;
-    transition: .3s ease-in-out all;
+    transition: .5s ease-in-out all;
     z-index: 1;
+    background-color: #1f1f1f;
+
+}
+.slider {
+    width: 0px;
+    z-index: 0;
+    transition: .3s ease-in-out all;
 }
 
-.sound button:hover{
-    background-color: #383838;
-    opacity: 1;
-}
-
-.sound .volume-slider{
+.sound .volume-slider {
     position: absolute;
     bottom: 5px;
     right: 88px;
     transform: rotate(-180deg);
-    background-color: #464646;
+    background-color: #383838;
     display: flex;
     justify-content: center;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     z-index: 0;
-    
-
-}
-
-.sound .volume-slider{
     height: 38px;
-    width: 150px;
+    width: 0px;
     display: flex;
     align-items: center;
     justify-content: left;
-}
-
-/* .slider{
-    width: 140px;
-    height: 5px;
-    background-color: white;
-    display: flex;
-    position: relative;
-    align-items: center;
-    appearance: none;
-    outline: none;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-} */
-
-
-/* .slider::before{
-    content: '';
-    height: 5px;
-    background-color: #464646;
-    position: absolute;
-    top: 0px;
-    right: 0px;
     z-index: 2;
-    cursor: pointer;
+    overflow: hidden;
+    transition: .3s ease-in-out all;
 }
 
+.sound:hover .slider {
+
+    width: 140px;
+}
+
+.sound:hover .volume-slider {
+
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+    width: 150px;
+}
+
+.sound:hover button,
+.sound:hover .volume-slider,
+.sound:hover .slider {
+    cursor: pointer;
+    background-color: #383838;
+
+}
+.sound:hover button{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+}
+
+
+
+
+
+
+/*
 
 
 .sound .volume-slider .slider::-moz-range-track{

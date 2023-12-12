@@ -5,6 +5,9 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    colors: {
+      'purple': '#4a448b',
+    },
     extend: {},
   },
   plugins: [],
