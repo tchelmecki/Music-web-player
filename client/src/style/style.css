@@ -186,10 +186,54 @@
     transition: 0.2s ease-in-out all;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
+
+
 .closeBtn{
     cursor: pointer;
 }
 
+.add-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 70px;
+    border-radius: 10px;
+    background-color: #1f1f1f;
+    position: relative;
+}
+
+.notification-progress{
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    width: calc(100% - 10px);
+    height: 3px;
+    transform: scaleX(0);
+    transform-origin: left;
+    background-image: linear-gradient(
+        to right, #539bdb, #3250bf);
+    animation: load 3s 0.25s linear forwards;
+}
+
+@keyframes fade-in {
+    5%{
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    90%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+}
+@keyframes load {
+    to{
+        transform: scaleX(1);
+    }
+    
+}
 
 /*==============CONTROL-PANEL==============*/
 

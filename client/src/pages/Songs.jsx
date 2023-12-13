@@ -11,6 +11,7 @@ import Control from "../components/Control";
 import { FaPlus } from "react-icons/fa";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import AddSong from '../components/AddSong';
+import AddInfo from '../components/AddInfo';
 
 
 const Songs = (props) => {
@@ -18,6 +19,7 @@ const Songs = (props) => {
    const [song, setSong] = useState([]);
    const [selectedSong, setSelectedSong] = useState(null); 
    const [openModal, setOpenModal] = useState(false);
+   const [openInfo, setOpenInfo] = useState(false);
 
 
   //effects
@@ -79,7 +81,11 @@ const Songs = (props) => {
                     {/* <audio src="../assets/music1.wav"></audio> */}
                 </div>
             ))}
-             <AddSong open={openModal} onClose={()=>setOpenModal(false)}/>
+             <AddSong className="hover:bg-purple" open={openModal} onClose={()=>setOpenModal(false)}/>
+             <div onClick={()=>setOpenInfo(true)}>TEST</div>
+             <AddInfo open={openInfo} onClose={()=>setOpenInfo(false)}/>
+
+         
             
         </div>
     </>
