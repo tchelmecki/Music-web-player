@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from "axios";
 import "../style/style.css";
 import { Link} from "react-router-dom";
@@ -20,6 +20,7 @@ const Songs = (props) => {
    const [selectedSong, setSelectedSong] = useState(null); 
    const [openModal, setOpenModal] = useState(false);
    const [openInfo, setOpenInfo] = useState(false);
+   const [containerHeight, setContainerHeight] = useState('100svh');
 
 
   //effects
@@ -39,20 +40,34 @@ const Songs = (props) => {
   const playSelectedSong = (song) => {
     setSelectedSong(song);
     console.log("Selected song in songs:", song);
+    if (song) {
+      setContainerHeight('85svh'); // Set the desired height
+    } else {
+      setContainerHeight('100svh'); // Reset to the default height
+    }
+  };
+
+  //ref
+  const addSongRef = useRef(null);
+
+
+  const scrollToBottom = () => {
+    addSongRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <>
-        <Left />
+        <Left style={{ height: containerHeight }} />
         {selectedSong ? (
         <Control selectedSong={selectedSong} songs={song} />) : null}
-        <div className="songs-container">
+        <motion.div className="songs-container" style={{ height: containerHeight }} animate={{ height: containerHeight }}
+        transition={{ duration: 0.3 }}>
         <div className='songs-etc'>
           <div className='w-1/6 flex justify-center'>ARTIST</div>
           <div className='w-1/6 flex justify-center '>TITLE</div>
           <div className='w-1/6 flex justify-center'>ALBUM</div>
           <div className='w-1/6 flex justify-center'>GENRE</div>
-          <div className='plus' onClick={()=>setOpenModal(true)}><FaPlus /></div>
+          <div className='plus' onClick={()=>{setOpenModal(true); scrollToBottom();}}><FaPlus /></div>
          
         </div>
         
@@ -72,7 +87,7 @@ const Songs = (props) => {
                         <div className='songs-record w-60 h-full'>{songs.title}</div>
                         <div className='songs-record w-60 h-full'>{songs.album}</div>
                         <div className='songs-record w-60 h-full'>{songs.genre}</div>
-                        <div className='songs-record float-right flex justify-end w-96 h-full ml-16 text-2xl '><span><HiOutlineDotsVertical /></span></div>
+                        <div className='songs-record float-right flex justify-end w-96 h-full ml-20 text-2xl '><span><HiOutlineDotsVertical /></span></div>
                         {/* <div className='songs-record w-60 h-full'>{songs.file_path}</div>
                         <div className='songs-record w-60 h-full'>{songs.cover}</div> */}
 
@@ -81,13 +96,15 @@ const Songs = (props) => {
                     {/* <audio src="../assets/music1.wav"></audio> */}
                 </div>
             ))}
-             <AddSong className="hover:bg-purple" open={openModal} onClose={()=>setOpenModal(false)}/>
-             <div onClick={()=>setOpenInfo(true)}>TEST</div>
-             <AddInfo open={openInfo} onClose={()=>setOpenInfo(false)}/>
+            <div ref={addSongRef}>
+              <AddSong className='hover:bg-purple' open={openModal} onClose={() => setOpenModal(false)} />
+            </div>
+             {/* <div id="bottom" style={{ height: "1px", visibility: "hidden" }} /> */}
+
 
          
             
-        </div>
+        </motion.div>
     </>
 );
 

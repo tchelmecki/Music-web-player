@@ -47,8 +47,12 @@ db.connect((err) => {
 
 app.get("/main", (req, res) => {
     if(req.session.username) {
+        console.log("Logged in user:", req.session.username);
+x
         return res.json({valid: true, username: req.session.username});
     } else {
+        console.log("Not logged in");
+
         return res.json({valid: false});
     }
 });

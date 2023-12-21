@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "../style/style.css";
 import { motion } from "framer-motion";
+import AddInfo from './AddInfo';
 
 const AddSong = ({open, onClose}) => {
+  const [openInfo, setOpenInfo] = useState(false);
   
     if(!open) return null;
   return (
@@ -35,6 +37,9 @@ const AddSong = ({open, onClose}) => {
            
         
         <p className='closeBtn' onClick={onClose}>X</p>
+        <div open={openInfo} className='add-record-accept' onClick={()=>setOpenInfo(true)}>ADD</div>
+        <AddInfo  open={openInfo} onClose={()=>setOpenInfo(false)}/>
+
     </motion.div>
   )
 }

@@ -49,15 +49,15 @@ const Signup = (props) => {
 
     return(
         <>
-        <div className="home-container">
+        <motion.div className="home-container" initial={{ opacity: 0}}
+            animate={{ opacity: 1}}
+            transition={{ delay: 0.2,  type: 'spring', duration: 2}}>
             <Navbar /> 
             {/* <Form text="Sign in to start listening" 
                 info="Don't have an account yet?"
                 info2="Register here."/> */}
             <motion.div className="form-container"
-            initial={{ opacity: 0}}
-            animate={{ opacity: 1}}
-            transition={{ delay: 0.2,  type: 'spring', duration: 2}}>
+            >
                 <div className="home-form">
                     <form onSubmit={handleSubmit} className="flex flex-wrap">
                         <div className="form-conf">
@@ -84,7 +84,7 @@ const Signup = (props) => {
                     </form>      
                 </div>
             </motion.div>
-        </div>
+        </motion.div>
         </>
     )
 };

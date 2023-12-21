@@ -178,7 +178,7 @@ const Control = React.memo(({ selectedSong }) =>{
                     min="0"
                     max="1"
                     step="0.1"
-                    defaultValue={audioPlayer.current ? audioPlayer.current.volume : 0}
+                    // defaultValue={audioPlayer.current ? audioPlayer.current.volume : 0}
                     onChange={handleVolumeChange}
                     />
                 </div>
