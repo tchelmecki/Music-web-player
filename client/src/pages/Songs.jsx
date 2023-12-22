@@ -45,7 +45,7 @@ const Songs = (props) => {
     } else {
       setContainerHeight('100svh'); // Reset to the default height
     }
-  };
+  }; 
 
   //ref
   const addSongRef = useRef(null);

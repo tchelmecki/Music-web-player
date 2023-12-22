@@ -4,6 +4,7 @@ import cors from "cors";
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import crypto from "crypto";
 // import jwt from 'jsonwebtoken';
 
 const app = express();
@@ -48,7 +49,7 @@ db.connect((err) => {
 app.get("/main", (req, res) => {
     if(req.session.username) {
         console.log("Logged in user:", req.session.username);
-x
+        
         return res.json({valid: true, username: req.session.username});
     } else {
         console.log("Not logged in");
@@ -79,12 +80,24 @@ app.get("/library", (req,res) => {
     })
 });
 
+
+//SHA-256
+const hashPassword = (password) => {
+
+    const passwordString = Array.isArray(password) ? password.join('') : password;
+
+    const sha256 = crypto.createHash("sha256");
+    sha256.update(passwordString);
+    return sha256.digest("hex");
+};
+
 app.post('/signup', (req, res) => {
+    const hashedPassword = hashPassword(req.body.pswd); 
     const q = "INSERT INTO users (`username`, `email`, `pswd`) VALUES (?)";
     const values = [
         req.body.username,
         req.body.email,
-        req.body.pswd
+        hashedPassword, 
     ];
     db.query(q, [values], (err, result) => {
         if(err) return res.json({ Message: "Error in Node" });
@@ -96,8 +109,10 @@ app.post('/signup', (req, res) => {
 
 
 app.post('/login', (req, res) => {
+    const hashedPassword = hashPassword(req.body.pswd); 
+
     const q = "SELECT * FROM users WHERE email = ? and pswd = ?";
-    db.query(q, [req.body.email, req.body.pswd], (err, result) => {
+    db.query(q, [req.body.email, hashedPassword], (err, result) => {
         if(err) return res.json({Message: "Error inside server"});
         if(result.length > 0){
             req.session.username = result[0].username;
@@ -108,6 +123,7 @@ app.post('/login', (req, res) => {
         }
     })
 })
+
 
 // app.post('/signup', (req, res) => {
 //     const q = "SELECT * FROM users WHERE `email` = ? AND `pswd` = ?";
