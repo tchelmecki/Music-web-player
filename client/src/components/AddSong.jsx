@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "../style/style.css";
 import { motion } from "framer-motion";
 import AddInfo from './AddInfo';
+import { FaCheck } from "react-icons/fa";
 
 const AddSong = ({open, onClose}) => {
   const [openInfo, setOpenInfo] = useState(false);
@@ -35,9 +36,8 @@ const AddSong = ({open, onClose}) => {
             <div>
             <input type="file" placeholder='title' /></div>
            
-        
-        <p className='closeBtn' onClick={onClose}>X</p>
-        <div open={openInfo} className='add-record-accept' onClick={()=>setOpenInfo(true)}>ADD</div>
+        <div open={openInfo} className='add-record-accept' onClick={()=>setOpenInfo(true)}><FaCheck /></div>
+        <div className='closeBtn' onClick={onClose}>x</div>
         <AddInfo  open={openInfo} onClose={()=>setOpenInfo(false)}/>
 
     </motion.div>

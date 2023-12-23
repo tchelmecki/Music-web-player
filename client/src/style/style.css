@@ -129,7 +129,7 @@
     position: relative;
     z-index: 0;
     overflow-y: auto; /* lub overflow-y: scroll; */
-
+    padding-bottom: 12px;
 }
 
 .songs{
@@ -147,7 +147,7 @@
     display: flex;
     /* justify-content:space-between; */
     align-items: center;
-    height: 70px;
+    height: 65px;
     border-radius: 10px;
     background-color: #2c2f33;
     padding-left: 80px;
@@ -245,6 +245,18 @@
 
 .closeBtn{
     cursor: pointer;
+    width: 35px;
+    height: 35px;
+    background-color: rgb(191, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    transition: .3s ease-in-out all;
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .add-info{
@@ -275,23 +287,20 @@
 }
 
 .add-record-accept{
-    width: 50px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     background-color: #4a448b;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-    position: absolute;
-    bottom: -50px;
-    right: 0;
     transition: .3s ease-in-out all;
 }
 
-.add-record-accept:hover{
+.add-record-accept:hover, .closeBtn:hover{
     cursor: pointer;
-    background-color: #1f1f1f;
+    opacity: 80%;
 }
 
 @keyframes fade-in {
@@ -632,32 +641,40 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .about{
-    width: 300px;
-    height: 300px;
+    width: 450px;
+    height: 350px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    padding: 15px;
+    
 }
 
 .foto-container{
-    width: 300px;
-    height: 300px;
+    width: 500px;
+    height: 600px;
     display: flex;
     align-items: center;
-    border-radius: 100%;
+    border-radius: 15px;
     background-image: url('../assets/tomasz.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
 }
 
+.icons-about{
+    transition: .2s ease-in-out all;
 
+}
+
+.icons-about:hover{
+    cursor: pointer;
+    transform: scale(1.1);    
+}
 
 
 
