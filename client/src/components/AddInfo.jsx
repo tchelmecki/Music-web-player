@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import '../style/style.css';
 
-const AddInfo = ({ open, onClose }) => {
-  const [isVisible, setIsVisible] = useState(open);
+const AddInfo = ({ playlistAdded, onClose }) => {
+  const [isVisible, setIsVisible] = useState(playlistAdded);
 
   useEffect(() => {
-    if (open) {
+    if (playlistAdded) {
       setIsVisible(true);
 
       const timerId = setTimeout(() => {
@@ -16,10 +16,10 @@ const AddInfo = ({ open, onClose }) => {
 
       return () => clearTimeout(timerId);
     }
-  }, [open, onClose]);
+  }, [playlistAdded, onClose]);
 
   const handleAnimationComplete = () => {
-    if (!open) {
+    if (!playlistAdded) {
       setIsVisible(false);
     }
   };
@@ -35,7 +35,7 @@ const AddInfo = ({ open, onClose }) => {
           transition={{ delay: 0.1, type: 'spring', duration: 1 }}
           onAnimationComplete={handleAnimationComplete}
         >
-          <p>A song has been added!✨</p>
+          <p>A playlist has been added!✨</p>
           <span className='notification-progress'></span>
         </motion.div>
       )}

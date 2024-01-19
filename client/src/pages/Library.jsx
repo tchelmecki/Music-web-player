@@ -1,54 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import axios from "axios";
-import { Link } from 'react-router-dom';
+// Komponent Library
+import React, { useState } from 'react';
+import axios from 'axios';
 import Left from '../components/Left';
-import Control from '../components/Control';
+import { FaPlus } from 'react-icons/fa';
+import AddPlaylist from '../components/AddPlaylist';
 
 const Library = () => {
+axios.defaults.withCredentials = true;
 
-  const [playlists, setPlaylists] = useState([]);
-
-  useEffect(() => {
-    const fetchAllPlaylists = async () => {
-      try{
-        const res = await axios.get("http://localhost:8800/library");
-        setPlaylists(res.data);
-      }catch(err){
-        console.log(err);
-      }
-    }
-    fetchAllPlaylists();
-  },[]);
-
-  const handleDelete = async (id) =>{
-    try {
-      await axios.delete("http://localhost:8800/library/"+id);
-      window.location.reload();
-    } catch (err) {
-      console.log(err);
-    }
+  const [showAddPlaylist, setShowAddPlaylist] = useState(false);
+  const addPlaylist = () => {
+    setShowAddPlaylist(true);
   }
+   
+
   return (
     <>
     <Left />
-    <div> 
-      <div className="library">
-        {playlists.map(library=>(
-          <div className="playlist grid grid-rows-1 grid-flow-col gap-4 " key={library.id_users}>
-            {/* <div className='bg-slate-400 text-center'>{library.studenci_id}</div> */}
-           <div className='bg-slate-400 text-center'>{library.username}</div>
-           <div className="text-center bg-slate-500">{library.email}</div>
-           <div className="text-center">{library.pswd}</div>
-           <button className="hover:bg-slate-600" onClick={()=>handleDelete(library.id_users)}>Delete</button>
-          </div>
-        ))}
-      </div>
-      
-      <button className="hover:bg-slate-600"><Link to="/add">Add position</Link></button>
-    </div>
-    {/* <Control /> */}
-    </>
-  )
-}
+       <div className="library-container">
+          <div className="announce-add-playlist">
+            <p>Create your playlist!</p>
+            <div className='plus' onClick={addPlaylist}><FaPlus /></div>
+           </div>
+            <AddPlaylist showAddPlaylist={showAddPlaylist} setShowAddPlaylist={setShowAddPlaylist} />
+                {/* {showAddPlaylist && (
+                    <div className="modal">
+                        <p>Add a playlist</p>
+                        <input
+                            type="text"
+                            placeholder="Enter a name of playlist"
+                            value={newPlaylist.name_playlist}
+                            onChange={(e) => handleChange('name_playlist', e.target.value)}
+                        />
+                        <div className="buttons-addplaylist">
+                            <button onClick={handleCreatePlaylist}>Create</button>
+                            <button onClick={() => setShowAddPlaylist(false)}>Close</button>
+                        </div>
+                    </div>
+                )} */}
+            </div>
+        </>
+    );
+};
 
 export default Library;

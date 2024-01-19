@@ -49,7 +49,7 @@ const Signup = (props) => {
 
     return(
         <>
-        <motion.div className="home-container" initial={{ opacity: 0}}
+        <motion.div className="login-container" initial={{ opacity: 0}}
             animate={{ opacity: 1}}
             transition={{ delay: 0.2,  type: 'spring', duration: 2}}>
             <Navbar /> 

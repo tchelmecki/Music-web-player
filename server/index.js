@@ -31,7 +31,7 @@ const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "project",
+    database: "musicwebplayer",
     port: 55555
 }); 
 
@@ -44,9 +44,13 @@ db.connect((err) => {
     }
   });
 
+  app.use((req, res, next) => {
+    console.log('Received cookies:', req.cookies);
+    next();
+});
 
 
-app.get("/main", (req, res) => {
+app.get("/songs", (req, res) => {
     if(req.session.username) {
         console.log("Logged in user:", req.session.username);
         
@@ -70,16 +74,6 @@ app.post("/logout", (req, res) => {
       return res.json({ Message: "Wylogowano pomyślnie" });
     });
   });
-  
-
-app.get("/library", (req,res) => {
-    const q = "SELECT * FROM users";
-    db.query(q, (err, data) => {
-        if(err) return res.json(err)
-        return res.json(data);
-    })
-});
-
 
 //SHA-256
 const hashPassword = (password) => {
@@ -91,9 +85,11 @@ const hashPassword = (password) => {
     return sha256.digest("hex");
 };
 
+
+
 app.post('/signup', (req, res) => {
     const hashedPassword = hashPassword(req.body.pswd); 
-    const q = "INSERT INTO users (`username`, `email`, `pswd`) VALUES (?)";
+    const q = "INSERT INTO users (`username`, `email`, `password`) VALUES (?)";
     const values = [
         req.body.username,
         req.body.email,
@@ -105,42 +101,48 @@ app.post('/signup', (req, res) => {
     });
 });
 
+// app.post('/login', (req, res) => {
+//     const hashedPassword = hashPassword(req.body.pswd); 
 
-
-
-app.post('/login', (req, res) => {
-    const hashedPassword = hashPassword(req.body.pswd); 
-
-    const q = "SELECT * FROM users WHERE email = ? and pswd = ?";
-    db.query(q, [req.body.email, hashedPassword], (err, result) => {
-        if(err) return res.json({Message: "Error inside server"});
-        if(result.length > 0){
-            req.session.username = result[0].username;
-            // console.log(req.session.username);
-            return res.json({Login: true})
-        } else {
-            return res.json({Login: false})
-        }
-    })
-})
-
-
-// app.post('/signup', (req, res) => {
-//     const q = "SELECT * FROM users WHERE `email` = ? AND `pswd` = ?";
-//     db.query(q, [req.body.email, req.body.pswd], (err, data) => {
-//         if(err) {
-//             return res.json("Error");
-//         }
-//         if(data.length > 0){
-//             const id = data[0].id;
-//             const token = jwt.sign({id}, "jwstSecretKey", {expiresIn: 300});
-//             return res.json({Login: true, token, data})
+//     const q = "SELECT * FROM users WHERE email = ? and password = ?";
+//     db.query(q, [req.body.email, hashedPassword], (err, result) => {
+//         if(err) return res.json({Message: "Error inside server"});
+//         if(result.length > 0){
+//             req.session.username = result[0].username;
+//             // console.log(req.session.username);
+//             return res.json({Login: true})
 //         } else {
-//             return res.json("Fail");
+//             return res.json({Login: false})
 //         }
 //     })
 // })
 
+app.post("/login", (req, res) => {
+    const hashedPassword = hashPassword(req.body.pswd);
+
+    const q = "SELECT * FROM users WHERE email = ? AND password = ?";
+    db.query(q, [req.body.email, hashedPassword], (err, result) => {
+        if (err) {
+            console.error('Error inside server:', err.message);
+            return res.json({ Message: "Error inside server" });
+        }
+
+        if (result.length > 0) {
+            const user = result[0];
+            req.session.username = user.username;
+            req.session.user_id = user.user_id; // Ustaw rzeczywisty identyfikator użytkownika
+        
+            // Zapisz user_id, username i email w ciasteczkach
+            res.cookie('user_id', String(req.session.user_id), { sameSite: 'None', secure: true });
+            res.cookie('username', req.session.username, { sameSite: 'None', secure: true });
+            res.cookie('email', user.email, { sameSite: 'None', secure: true });
+        
+            return res.json({ Login: true });
+        } else {
+            return res.json({ Login: false });
+        }
+    });
+});
 
 app.get("/songs", (req,res) => {
     const q = "SELECT `author`,`title`, `genre`, `album`, `file_path`, `cover` from songs";
@@ -150,31 +152,58 @@ app.get("/songs", (req,res) => {
     })
 })
 
-app.post("/library", (req,res)=>{
-    const q = "INSERT INTO users (`id_users`,`username`,`email`,`pswd`) VALUES (?)";
-    const values = [
-        null,
-        req.body.username,
-        req.body.email,
-        req.body.pswd,
-    ];
+// app.get("/users", (req, res) => {
+//     const q = "SELECT * FROM users LIMIT 10";
+    
+//     db.query(q, (err, data) => {
+//         if (err) return res.json(err);
+//         return res.json(data);
+//     });
+// });
 
-    db.query(q,[values], (err,data)=>{
-        if(err) return res.json(err);
-        return res.json("Adding has been created");
-    });
+// app.get("/library", (req,res) => {
+//     const q = "SELECT * FROM users LIMIT 10";
+//     db.query(q, (err, data) => {
+//         if(err) return res.json(err)
+//         return res.json(data);
+//     })
+// });
+
+
+
+app.post('/playlists', async (req, res) => {
+    try {
+        const { name_playlist } = req.body;
+
+        // Dodaj log tutaj
+        console.log('User ID from session:', req.session.user_id);
+
+        if (req.cookies.user_id) {
+            const user_id = req.cookies.user_id;
+            const result = await db.query('INSERT INTO playlists (name_playlist, user_id) VALUES (?, ?)', [name_playlist, user_id]);
+            const playlistId = result.insertId;
+
+            console.log('Playlist created successfully. Playlist ID:', playlistId);
+
+            res.json({ success: true, playlist_id: playlistId, message: 'Playlist created successfully' });
+        } else {
+            // Dodaj log tutaj
+            console.log('Unauthorized access attempt to /library');
+
+            res.status(401).json({ error: 'Unauthorized' });
+        }
+    } catch (error) {
+        console.error('Error creating playlist:', error.message);
+        res.status(500).json({ error: 'Error creating playlist' });
+    }
 });
 
 
-app.delete("/library/:id_users", (req,res)=>{
-    const libraryId = req.params.studenci_id;
-    const q = "DELETE from users WHERE id_users = ?";
 
-    db.query(q,[libraryId], (err,data)=>{
-        if(err) return res.json(err);
-        return res.json("Library has been deleted");
-    });
-})
+  
+
+
+  
 
 app.listen(8800, ()=>{
     console.log("connected to backend!");

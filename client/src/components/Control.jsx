@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import "../style/style.css";
 import { FaPlay } from 'react-icons/fa';
 import { AiFillStepBackward, AiFillStepForward } from 'react-icons/ai';
@@ -11,9 +11,12 @@ import { FaPause } from "react-icons/fa";
 import  music  from "../assets/music1.wav";
 import { TbRewindForward15 } from "react-icons/tb";
 import { TbRewindBackward15 } from "react-icons/tb";
+import MusicContext from "../../MusicContext";
 
 
 const Control = React.memo(({ selectedSong }) =>{
+
+    const { togglePlay } = useContext(MusicContext);
 
     //state
     const [isPlaying, setIsPlaying] = useState(false);
@@ -52,11 +55,15 @@ const Control = React.memo(({ selectedSong }) =>{
     }
 
     const whilePlaying = () => {
-        progressBar.current.value = audioPlayer.current.currentTime;
-        changePlayerCurrentTime();
-        animationRef.current = requestAnimationFrame(whilePlaying);
-
-    }
+        if (audioPlayer.current && audioPlayer.current.currentTime < duration) {
+          progressBar.current.value = audioPlayer.current.currentTime;
+          changePlayerCurrentTime();
+          animationRef.current = requestAnimationFrame(whilePlaying);
+        } else {
+          setIsPlaying(false);
+          cancelAnimationFrame(animationRef.current);
+        }
+      };
 
     // const whilePlaying = () => {
     //     if (audioPlayer.current.currentTime < duration) {

@@ -7,6 +7,8 @@ export default {
   theme: {
     colors: {
       'purple': '#4a448b',
+      'red': '#e31818',
+      'white': '#fff',
     },
     extend: {},
   },

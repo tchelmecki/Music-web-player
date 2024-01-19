@@ -25,7 +25,7 @@ const Content = () => {
                 <span className="tag">Music Player Web</span>
                 <span>Use this app to play your favourite song and explore <br /> your personal libraries. Enjoy!</span>
                 <button className="btn-file w-40 h-10 mt-3 border-none rounded-md">
-                    <Link to="/songs"><span className="flex justify-center items-center"><BiFolder className="mr-1"/>Explore</span></Link>
+                    <Link to="/login"><span className="flex justify-center items-center"><BiFolder className="mr-1"/>Explore</span></Link>
                 </button>
                 </div>
             </div>

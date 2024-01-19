@@ -26,16 +26,17 @@
     background-color: #ccc;
 }
 
+
+
 /*==============LEFT==============*/
 .left{
     width: 20svw;
-
     background-color: #282828;
     display: flex;
-    align-items: center;
     font-size: 20px;
     flex-direction: column;
-    position: relative;
+    /* position: relative; */
+    padding-left: 30px;
 }
 
 .left span{
@@ -51,18 +52,17 @@
 
 .pinion-ct{
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: 40px;
-    height: 40px;
     border-radius: 10px;
-    position: absolute;
-    left: 10px;
-    bottom: 10px;
     transition: .3s ease-in-out all;
+    position: relative;
 }
 .pinion{
-    font-size: 30px;
+    /* font-size: 30px; */
+    margin-right: 5px;
+}
+.about-pinion{
+    display: none;
 }
 /* Dodaj transformacji dla .pinion-ct:hover i .pinion */
 .pinion-ct:hover .pinion,
@@ -77,7 +77,32 @@
 
 .pinion-ct:hover{
     background-color: #1f1f1f;
+    width: 150px;
+    height: 100px;
+
 }
+
+.pinion-ct:hover .about-pinion {
+    display: flex;
+}
+
+.stay-settings{
+    position: absolute;
+    top: 0;
+    
+}
+
+
+.visible {
+    display: block;
+}
+  
+.hidden {
+    display: none;
+}
+
+
+  
 
 /*==============CONTENT==============*/
 
@@ -500,6 +525,12 @@
     width: 100svw;
     height: 100svh;
     display: flex;
+    justify-content: center;    
+}
+.login-container{
+    width: 100svw;
+    height: 100svh;
+    display: flex;
     flex-wrap: wrap;
     
 }
@@ -532,6 +563,11 @@
     border-radius: 20px; */
     display: flex;
     flex-direction: column;
+}
+
+.error-message{
+    margin-bottom: 18px;
+    color: red;
 }
 
 .form-conf button{
@@ -645,10 +681,11 @@
 
 .about{
     width: 450px;
-    height: 350px;
+    height: 600px;
     display: flex;
     flex-direction: column;
-    padding: 15px;
+
+
     
 }
 
@@ -676,6 +713,13 @@
     transform: scale(1.1);    
 }
 
+
+
+/*==============LIBRARY================*/
+.library{
+    height: 100svh;
+    width: 80svw;
+}
 
 
 

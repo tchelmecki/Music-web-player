@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import headpones from "../assets/headphones3D.png";
 import axios from "axios";
 import hair from "../assets/hair.png"
+import Content from "../components/Content";
 
 
 const Home = () => {
@@ -35,11 +36,12 @@ const Home = () => {
         <motion.div className="home-container" initial={{ opacity: 0}}
             animate={{ opacity: 1}}
             transition={{ delay: 0.2,  type: 'spring', duration: 2}}>
-            <Navbar /> 
-            <div className="form-container">
+            {/* <Navbar />  */}
+            <Content />
+            {/* <div className="form-container">
                 <Link to="/login"><button className="bg-purple w-60 rounded-full h-14 mb-6 mr-2" type='submit'>Login</button></Link>
                 <Link to="/signup"><button className="bg-purple w-60 rounded-full h-14 mb-6 ml-2" type='submit'>Sign up</button></Link>
-            </div> 
+            </div>  */}
         </motion.div>
         </>
     )

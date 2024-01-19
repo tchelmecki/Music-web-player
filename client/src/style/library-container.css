@@ -1,0 +1,89 @@
+.library-container{
+    height: 100svh;
+    width: 80svw;
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+}
+
+.announce-add-playlist{
+    width: 650px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+p{
+    font-size: 20px;
+    padding-right: 10px;
+}
+
+.plus{
+    position: inherit;
+}
+
+/*=============AddPlaylist.jsx=============*/
+.block {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Przezroczyste tło overlay */
+    z-index: 3; /* Ustaw z-index poniżej modala */
+  }
+
+.modal {
+    position: fixed; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    width: 40%;
+    max-width: 400px; 
+    height: 400px;
+    background-color: #4a448b;
+}
+.modal{
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.modal p{
+    margin-bottom: 15px
+}
+
+.buttons-addplaylist{
+    margin-top: 15px;
+}
+
+.modal  input{
+    width: 215px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    color: #000  ;
+}
+
+.buttons-addplaylist button:first-child{
+    margin-right: 15px;
+}
+
+.buttons-addplaylist button{
+    background-color: #363167;
+
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.buttons-addplaylist button:hover{
+    background-color: #3d3875;
+
+}
