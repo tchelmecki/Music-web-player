@@ -66,8 +66,8 @@ const Login = (props) => {
                         <span className="font-medium text-6xl pb-10">Sign in to start listening</span>
                         {error && (
                         <motion.div 
-                            initial={{ opacity: 0, y: -20 }}  // Ustawienia początkowe
-                            animate={{ opacity: 1, y: 0 }}    // Animacja pojawiania się i lekkiego przesunięcia
+                            initial={{ opacity: 0, y: -20 }}  
+                            animate={{ opacity: 1, y: 0 }}   
                             transition={{ type: 'spring', duration: 0.5 }}
                             className="error-message">
                         {error}

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from "axios";
 import "../style/style.css";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Form from "../components/Form";
 import { motion } from "framer-motion";
@@ -13,8 +13,8 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 import AddSong from '../components/AddSong';
 import AddInfo from '../components/AddInfo';
 
-const Songs = (props) => {
-  // states
+const SongsPlaylist = (props) => {
+  //============useStates=============
   const [song, setSong] = useState([]);
   const [selectedSong, setSelectedSong] = useState(null); 
   const [openModal, setOpenModal] = useState(false);
@@ -25,9 +25,11 @@ const Songs = (props) => {
   const location = useLocation();
   const user_id = location.state ? location.state.user_id : null;
 
+
+  const { playlistId } = useParams();
   axios.defaults.withCredentials = true;
 
-  // effects
+  //============UseEffects=============
   useEffect(() => {
     axios
       .get('http://localhost:8800/songs')
@@ -48,10 +50,12 @@ const Songs = (props) => {
   }, [props.location]);
 
   useEffect(() => {
+    console.log("Otrzymany id playlisty:", playlistId);
+
     const fetchAllSongs = async () => {
       try {
-        const res = await axios.get("http://localhost:8800/user-songs");
-        console.log('Fetched songs data:', res.data); // Log the fetched data
+        const res = await axios.get(`http://localhost:8800/playlists/${playlistId}`);
+        console.log('Fetched songs data:', res.data); 
         setSong(res.data);
       } catch (err) {
         console.error('Error fetching user songs:', err);
@@ -59,26 +63,9 @@ const Songs = (props) => {
     };
   
     fetchAllSongs();
-  }, []);
+  }, [playlistId]);
 
-  const handleUpload = (formData) => {
-    return fetch('http://localhost:8800/upload', {
-      method: 'POST',
-      body: formData,
-      // Dodaj odpowiednie nagłówki, jeśli to konieczne
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Odpowiedź od backendu:', data);
-        // Obsługa odpowiedzi od backendu
-      })
-      .catch(error => {
-        console.error('Błąd podczas wysyłania danych na backend:', error);
-        throw error;
-      });
-  };
-
-  // func
+  //===============function================
   const playSelectedSong = (songs) => {
     setSelectedSong(songs);
     console.log("Selected song in songs:", songs);
@@ -89,12 +76,38 @@ const Songs = (props) => {
     }
   };
 
-  // ref
-  const addSongRef = useRef(null);
-
   const scrollToBottom = () => {
     addSongRef.current.scrollIntoView({ behavior: 'smooth' });
   };
+
+
+  const handleUpload = async (formData) => {
+    try {
+      const response = await fetch('http://localhost:8800/upload', {
+        method: 'POST',
+        body: formData,
+        credentials: 'include', 
+      });
+  
+      if (!response.ok) {
+        console.error('Błąd podczas przesyłania danych na backend:', response.statusText);
+        throw new Error('Błąd podczas przesyłania danych na backend');
+      }
+  
+      const data = await response.json();
+      console.log('Odpowiedź od backendu:', data);
+      window.location.reload();
+      
+    } catch (error) {
+      console.error('Błąd podczas przesyłania danych na backend:', error.message);
+
+    }
+  };
+
+  //================useRef====================
+  const addSongRef = useRef(null);
+
+  
 
   return (
     <>
@@ -116,20 +129,22 @@ const Songs = (props) => {
           <div className='w-1/6 flex justify-center '>TITLE</div>
           <div className='w-1/6 flex justify-center'>ALBUM</div>
           <div className='w-1/6 flex justify-center'>GENRE</div>
-          <div className='absolute right-5' onClick={()=>{setOpenModal(true); scrollToBottom();}}>All your songs</div>
+          <div className='w-1/6 flex justify-center'>{song.length > 0 ? song[0].name_playlist : ''}</div>
+          <div className='plus' onClick={()=>{setOpenModal(true); scrollToBottom();}}><FaPlus /></div>
         </motion.div>
         {user_id && <p>User ID: {user_id}</p>}
         {user_id && <p>User ID: {user_id}</p>}
         {song.map((songs) => (
           <motion.div className="songs" key={songs.songs_id}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.1, type: 'spring', duration: 1 }}>
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.1, type: 'spring', duration: 1 }}>
             <div className='songs-info' onClick={() => playSelectedSong(songs)}>
               <div className='flex justify-center items-center songs-record w-20 h-full '>
                 <div
                   className='cover'
                   style={{
+                    // backgroundImage: `url(../../src/assets/${songs.cover})`,
                     backgroundImage: `url(http://localhost:8800/assets/${songs.cover})`,
                     backgroundPosition: 'center',
                     backgroundSize: 'cover',
@@ -151,17 +166,19 @@ const Songs = (props) => {
           </motion.div>
         ))}
         <div ref={addSongRef}>
-          <AddSong
-            className='hover:bg-purple'
-            open={openModal}
-            onUpload={handleUpload}
-            onClose={() => setOpenModal(false)}
-          />
-          {/* <AddInfo/> */}
+        <AddSong
+          className='hover:bg-purple'
+          open={openModal}
+          onUpload={handleUpload} // Upewnij się, że ta funkcja jest zdefiniowana
+          onClose={() => setOpenModal(false)}
+          playlistId={playlistId} // Przekazanie playlistId jako props
+        />
+
+
         </div>
       </motion.div>
     </>
   );
 };
 
-export default Songs;
+export default SongsPlaylist;

@@ -13,6 +13,7 @@ import { IoSearchSharp } from "react-icons/io5";
 import AddPlaylist from "./AddPlaylist";
 
 const Left = ({ containerHeight }) => {
+  const [searchTerm, setSearchTerm] = useState("");
 
   
     const handleLogout = async () => {
@@ -34,7 +35,9 @@ const Left = ({ containerHeight }) => {
              >
 
             <Link to="/songs"><span class="flex  items-center font-medium text-2xl">MUSIC WEB PLAYER </span></Link>
-            <span class="flex  items-center font-medium text-2xl"><input type="text" placeholder="search..." className="w-4/6 pl-2 bg-white text-xl text-purple rounded"/></span>
+            <span class="flex  items-center font-medium text-2xl"><input type="text" placeholder="search..." className="w-4/6 pl-2 bg-white text-xl text-purple rounded"
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      /></span>
 
             <div className="your-library flex justify-center items-center"><span className="flex items-center w-full "><PiPlaylistBold  className="mr-1 " /><Link to="/library"> your library </Link></span></div>
 

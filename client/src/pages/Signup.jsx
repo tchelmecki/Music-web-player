@@ -24,17 +24,17 @@ const Signup = (props) => {
 
     axios.defaults.withCredentials = true;
 
-    useEffect(() => {
-        axios.get('http://localhost:8800/main')
-        .then( res => {
-            if(res.data.valid){
-                navigate('/main');
-            } else{
-                navigate('/signup');
-            }
-        })
-        .catch(err => console.log(err))
-    }, [])
+    // useEffect(() => {
+    //     axios.get('http://localhost:8800/main')
+    //     .then( res => {
+    //         if(res.data.valid){
+    //             navigate('/main');
+    //         } else{
+    //             navigate('/signup');
+    //         }
+    //     })
+    //     .catch(err => console.log(err))
+    // }, [])
 
 
     const handleSubmit = async (event) => {

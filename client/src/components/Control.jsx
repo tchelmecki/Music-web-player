@@ -41,7 +41,8 @@ const Control = React.memo(({ selectedSong }) =>{
         const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
         return `${returnedMinutes} : ${returnedSeconds}`;
     }
-
+    
+    
     const togglePlayPause = () => {
         const prevValue = isPlaying;
         setIsPlaying(!prevValue);
@@ -106,7 +107,6 @@ const Control = React.memo(({ selectedSong }) =>{
         audioPlayer.current.volume = volumeValue;
       };
 
-
       const [isHovered, setIsHovered] = useState(false);
 
         const handleMouseEnter = () => {
@@ -125,7 +125,9 @@ const Control = React.memo(({ selectedSong }) =>{
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1,  type: 'spring', duration: 0.5}}>
-            <audio ref={audioPlayer} src={`src/assets/${selectedSong?.file_path}`} type="audio/wav"></audio>
+            <audio ref={audioPlayer} src={`http://localhost:8800/assets/${selectedSong?.file_path}`} type="audio/wav"
+             onPlay={() => setIsPlaying(true)} onPause={() => setIsPlaying(false)}></audio> 
+             {/* nowe onPlay onPause - tego nie bylo */}
             
             {/* progress bar */}
             <div className="bar-record">
@@ -140,7 +142,7 @@ const Control = React.memo(({ selectedSong }) =>{
             <div className="w-full  grid grid-cols-3">
             <div className="ml-5">
                 <div className="flex">
-                    <img className="cover" src={`src/assets/${selectedSong?.cover}`}></img>
+                    <img className="cover" src={`http://localhost:8800/assets/${selectedSong?.cover}`}></img>
                     <div className="flex flex-col ml-2">
                         <span className="font-bold">{selectedSong?.title}</span>
                         <span>{selectedSong?.author}</span> 

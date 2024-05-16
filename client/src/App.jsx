@@ -9,6 +9,7 @@ import Songs from './pages/Songs';
 import Login from './pages/Login';
 import About from './pages/About';
 import { MusicProvider } from '../MusicContext'; // Import dostawcy kontekstu
+import SongsPlaylist from './pages/SongsPlaylist';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/main" element={<Main />} />
             <Route path="/songs" element={<Songs />} />
             <Route path="/library" element={<Library />} />
+            <Route path="/library/playlist/:playlistId" element={<SongsPlaylist />} />
             <Route path="/add" element={<Add />} />
             <Route path="/about" element={<About />} />
           </Routes>
